@@ -1,64 +1,94 @@
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PresSure Fit Finder</title>
 
-    const checkboxes = document.querySelectorAll(".risk-checkbox");
-    const noneCheckbox = document.getElementById("none");
-    const resultBox = document.getElementById("result");
-
-    function updateResult() {
-        let anyRisk = false;
-
-        checkboxes.forEach(cb => {
-            if (cb !== noneCheckbox && cb.checked) {
-                anyRisk = true;
-            }
-        });
-
-        if (anyRisk) {
-            resultBox.innerHTML = `<span class="highlight">Based on your answers, PresSure may be a strong fit for you.</span>`;
-        } else if (noneCheckbox.checked) {
-            resultBox.innerHTML = `PresSure may not be necessary for you at this time.`;
-        } else {
-            resultBox.innerHTML = ``;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.7;
+            color: #333;
         }
-    }
 
-    // When selecting any regular option
-    checkboxes.forEach(cb => {
-        if (cb !== noneCheckbox) {
-            cb.addEventListener("change", () => {
-                if (cb.checked) {
-                    noneCheckbox.checked = false;
-                    noneCheckbox.disabled = false;
-
-                    // Re-enable all other checkboxes
-                    checkboxes.forEach(x => {
-                        if (x !== noneCheckbox) x.disabled = false;
-                    });
-                }
-                updateResult();
-            });
+        h1 {
+            text-align: center;
+            color: #d36b8a;
+            font-size: 42px;
+            margin-bottom: 20px;
         }
-    });
 
-    // When selecting "None of the above"
-    noneCheckbox.addEventListener("change", () => {
-        if (noneCheckbox.checked) {
-            // Uncheck all others
-            checkboxes.forEach(cb => {
-                if (cb !== noneCheckbox) {
-                    cb.checked = false;
-                    cb.disabled = true;
-                }
-            });
-        } else {
-            // Re-enable all options if user unchecks "None"
-            checkboxes.forEach(cb => {
-                cb.disabled = false;
-            });
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 180px;
         }
-        updateResult();
-    });
 
-});
-</script>
+        label {
+            display: block;
+            margin: 12px 0;
+            font-size: 19px;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.3);
+            margin-right: 12px;
+            accent-color: #d36b8a;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        button {
+            background-color: #d36b8a;
+            color: white;
+            padding: 16px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c05f7c;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #d36b8a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- OPTIONAL LOGO -->
+    <!-- Replace "logo.jpg" with your logo file name -->
+    <img src="logo.jpg" alt="Logo" class="logo">
+
+    <h1>PresSure Fit Finder</h1>
+
+    <p>Select all that apply.</p>
+
+    <label><input type="checkbox" class="risk-checkbox"> I have been told by a healthcare provider that I may be at increased risk for breast cancer due to my genetics, family history, or breast density.</label>
+
+    <label><input type="checkbox" class="risk-checkbox"> I have previously been treated for breast cancer.</label>
+
+    <label><input type="checkbox" class="risk-checkbox"> I have received radiation treatment to my chest area.</label>
+
+    <label><input type="checkbox" class="risk-checkbox"> A close blood relative was diagnosed with breast cancer before age 50.</label>
+
+    <label><input type="checkbox" class="risk-checkbox"> A close relative has had male breast cancer at any age.</label>
+
+    <label><input type="checkbox" class="risk-checkbox"> Two or more close relatives on the same side of my family have been diagnosed with breast or prostate cancer.</label>
+
+    <label><input ty
