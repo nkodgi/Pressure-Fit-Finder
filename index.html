@@ -1,131 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PresSure Fit Finder</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #333;
-            margin: 0;
-            padding: 30px;
-        }
-
-        .container {
-            max-width: 850px;
-            margin: auto;
-        }
-
-        h1 {
-            text-align: center;
-            color: #d75a87;
-            margin-bottom: 10px;
-            font-size: 48px;
-        }
-
-        .logo {
-            display: block;
-            margin: 0 auto 10px auto;
-            max-width: 180px;
-        }
-
-        p.instructions {
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-
-        .checkbox-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            font-size: 20px;
-            padding: 10px 0;
-            cursor: pointer;
-        }
-
-        input[type="checkbox"] {
-            transform: scale(1.3);
-            margin-right: 12px;
-        }
-
-        #result {
-            margin-top: 30px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .highlight {
-            color: #d75a87;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-
-    <!-- Your logo -->
-    <img src="logo.jpg" alt="PresSure Logo" class="logo">
-
-    <h1>PresSure Fit Finder</h1>
-
-    <p class="instructions">Select all that apply.</p>
-
-    <div class="checkbox-group">
-
-        <label><input type="checkbox" class="risk-checkbox" id="q1"> I have been told by a healthcare provider that I may be at increased risk for breast cancer due to my genetics, family history, or breast density.</label>
-
-        <label><input type="checkbox" class="risk-checkbox" id="q2"> I have previously been treated for breast cancer.</label>
-
-        <label><input type="checkbox" class="risk-checkbox" id="q3"> I have received radiation treatment to my chest area.</label>
-
-        <label><input type="checkbox" class="risk-checkbox" id="q4"> A close blood relative was diagnosed with breast cancer before age 50.</label>
-
-        <label><input type="checkbox" class="risk-checkbox" id="q5"> A close relative has had male breast cancer at any age.</label>
-
-        <label><input type="checkbox" class="risk-checkbox" id="q6"> Two or more close relatives on the same side of my family have been diagnosed with breast or prostate cancer.</label>
-
-        <label><input type="checkbox" class="risk-checkbox" id="q7"> Someone in my family carries a known breast-cancer–related genetic mutation (BRCA1, BRCA2, PALB2, TP53, etc.).</label>
-
-        <label><input type="checkbox" class="risk-checkbox" id="none"> <span style="font-weight:bold;">None of the above apply to me.</span></label>
-
-    </div>
-
-    <div id="result"></div>
-</div>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
     const checkboxes = document.querySelectorAll(".risk-checkbox");
     const noneCheckbox = document.getElementById("none");
     const resultBox = document.getElementById("result");
-
-    // When ANY risk factor is checked → uncheck "None of the above"
-    checkboxes.forEach(cb => {
-        if (cb !== noneCheckbox) {
-            cb.addEventListener("change", () => {
-                if (cb.checked) {
-                    noneCheckbox.checked = false;
-                }
-                updateResult();
-            });
-        }
-    });
-
-    // When selecting "None" → uncheck ALL other boxes
-    noneCheckbox.addEventListener("change", () => {
-        if (noneCheckbox.checked) {
-            checkboxes.forEach(cb => {
-                if (cb !== noneCheckbox) cb.checked = false;
-            });
-        }
-        updateResult();
-    });
 
     function updateResult() {
         let anyRisk = false;
@@ -145,8 +23,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // When selecting any regular option
+    checkboxes.forEach(cb => {
+        if (cb !== noneCheckbox) {
+            cb.addEventListener("change", () => {
+                if (cb.checked) {
+                    noneCheckbox.checked = false;
+                    noneCheckbox.disabled = false;
+
+                    // Re-enable all other checkboxes
+                    checkboxes.forEach(x => {
+                        if (x !== noneCheckbox) x.disabled = false;
+                    });
+                }
+                updateResult();
+            });
+        }
+    });
+
+    // When selecting "None of the above"
+    noneCheckbox.addEventListener("change", () => {
+        if (noneCheckbox.checked) {
+            // Uncheck all others
+            checkboxes.forEach(cb => {
+                if (cb !== noneCheckbox) {
+                    cb.checked = false;
+                    cb.disabled = true;
+                }
+            });
+        } else {
+            // Re-enable all options if user unchecks "None"
+            checkboxes.forEach(cb => {
+                cb.disabled = false;
+            });
+        }
+        updateResult();
+    });
+
 });
 </script>
-
-</body>
-</html>
