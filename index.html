@@ -42,6 +42,13 @@
             text-align: left;
             margin: 20px 0;
             font-size: 1rem;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .question input {
+            margin-top: 4px;
         }
         button {
             background-color: #e89abf;
@@ -90,22 +97,52 @@
 
     <div class="container">
 
-        <!-- NEW HEADER YOU REQUESTED -->
         <p style="text-align:left; font-weight:600; margin-bottom:15px;">
             Please check any that apply to you.
         </p>
 
         <form id="quizForm">
-            <div class="question"><input type="checkbox" class="fit" name="q1"> I have received radiation treatment to my chest area.</div>
-            <div class="question"><input type="checkbox" class="fit" name="q2"> I have previously been treated for breast cancer.</div>
-            <div class="question"><input type="checkbox" class="fit" name="q3"> I have been told by a healthcare provider that I may be at higher risk for breast cancer due to my genetics, family history, or breast density.</div>
-            <div class="question"><input type="checkbox" class="fit" name="q4"> I have a close blood relative who was diagnosed with breast cancer before age 50.</div>
-            <div class="question"><input type="checkbox" class="fit" name="q5"> I have a close relative who has had male breast cancer at any age.</div>
-            <div class="question"><input type="checkbox" class="fit" name="q6"> I have two or more close relatives on the same side of my family who have been diagnosed with breast or prostate cancer.</div>
-            <div class="question"><input type="checkbox" class="fit" name="q7"> Someone in my family carries a breast-cancer–related genetic mutation (BRCA1, BRCA2, PALB2, TP53).</div>
+
+            <!-- Q2 becomes Q1 -->
+            <div class="question">
+                <input type="checkbox" class="fit" name="q2">
+                <label>I have previously been treated for breast cancer.</label>
+            </div>
+
+            <!-- Q1 becomes Q2 -->
+            <div class="question">
+                <input type="checkbox" class="fit" name="q1">
+                <label>I have received radiation treatment to my chest area.</label>
+            </div>
+
+            <div class="question">
+                <input type="checkbox" class="fit" name="q3">
+                <label>I have been told by a healthcare provider that I may be at higher risk for breast cancer due to my genetics, family history, or breast density.</label>
+            </div>
+
+            <div class="question">
+                <input type="checkbox" class="fit" name="q4">
+                <label>I have a close blood relative who was diagnosed with breast cancer before age 50.</label>
+            </div>
+
+            <div class="question">
+                <input type="checkbox" class="fit" name="q5">
+                <label>I have a close relative who has had male breast cancer at any age.</label>
+            </div>
+
+            <div class="question">
+                <input type="checkbox" class="fit" name="q6">
+                <label>I have two or more close relatives on the same side of my family who have been diagnosed with breast or prostate cancer.</label>
+            </div>
+
+            <div class="question">
+                <input type="checkbox" class="fit" name="q7">
+                <label>Someone in my family carries a breast-cancer–related genetic mutation (BRCA1, BRCA2, PALB2, TP53).</label>
+            </div>
 
             <div class="question" style="font-weight: bold; margin-top: 25px;">
-                <input type="checkbox" id="noneOption"> None of the above apply to me.
+                <input type="checkbox" id="noneOption">
+                <label>None of the above apply to me.</label>
             </div>
 
             <button type="button" onclick="checkAnswers()">See My Result</button>
@@ -129,14 +166,12 @@
 const fitBoxes = document.querySelectorAll(".fit");
 const noneBox = document.getElementById("noneOption");
 
-// If "None" is selected → uncheck all other boxes
 noneBox.addEventListener("change", () => {
     if (noneBox.checked) {
         fitBoxes.forEach(cb => cb.checked = false);
     }
 });
 
-// If any real option is selected → uncheck "None"
 fitBoxes.forEach(cb => {
     cb.addEventListener("change", () => {
         if (cb.checked) {
