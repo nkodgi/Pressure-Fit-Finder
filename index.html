@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PresSure Fit Finder</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #444;
+            text-align: center;
+        }
+        header {
+            padding: 40px 20px 10px;
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+            opacity: 0.9;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-top: 10px;
+            color: #e89abf;
+            font-weight: 600;
+        }
+        .subtext {
+            font-size: 1.1rem;
+            color: #777;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fcebf3;
+            padding: 30px;
+            border-radius: 20px;
+        }
+        .question {
+            text-align: left;
+            margin: 20px 0;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #e89abf;
+            border: none;
+            padding: 14px 30px;
+            color: white;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 25px;
+        }
+        button:hover {
+            background-color: #d786ad;
+        }
+        #resultBox {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #ffe6f2;
+            border-radius: 15px;
+            font-size: 1.1rem;
+        }
+        .qr-section {
+            margin-top: 50px;
+            padding: 20px;
+        }
+        .qr-section h3 {
+            color: #e89abf;
+            margin-bottom: 10px;
+        }
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-placeholder.png" alt="PresSure Logo" class="logo" />
+        <h1>PresSure Fit Finder</h1>
+        <p class="subtext">A quick, gentle way to see if PresSure may support your breast wellness journey.</p>
+    </header>
+
+    <div class="container">
+        <form id="quizForm">
+            <div class="question"><input type="checkbox" name="q1"> Have you ever received radiation treatment to your chest area?</div>
+            <div class="question"><input type="checkbox" name="q2"> Have you previously been treated for breast cancer?</div>
+            <div class="question"><input type="checkbox" name="q3"> Has a healthcare provider ever told you that you may be at higher risk for breast cancer due to your genetics, family history, or breast density?</div>
+            <div class="question"><input type="checkbox" name="q4"> Has a close blood relative been diagnosed with breast cancer before age 50?</div>
+            <div class="question"><input type="checkbox" name="q5"> Do you have a close relative who has had male breast cancer at any age?</div>
+            <div class="question"><input type="checkbox" name="q6"> Do you have two or more close relatives on the same side with breast or prostate cancer?</div>
+            <div class="question"><input type="checkbox" name="q7"> Does anyone in your family carry a breast-cancer–related gene mutation (BRCA1, BRCA2, PALB2, TP53)?</div>
+
+            <button type="button" onclick="checkAnswers()">See My Result</button>
+        </form>
+        
+        <div id="resultBox"></div>
+    </div>
+
+    <div class="qr-section">
+        <h3>Share the PresSure Fit Finder</h3>
+        <p>Scan or save this QR code to share with others:</p>
+        <img src="qr-placeholder.png" width="160" />
+    </div>
+
+    <footer>
+        This tool is for general wellness purposes only and not for diagnosis or medical evaluation.
+    </footer>
+
+<script>
+function checkAnswers() {
+    const form = document.getElementById('quizForm');
+    const resultBox = document.getElementById('resultBox');
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    let anyYes = false;
+
+    checkboxes.forEach(cb => { if (cb.checked) anyYes = true; });
+
+    if (anyYes) {
+        resultBox.innerHTML = "Based on your answers, PresSure may be a strong fit for you.";
+    } else {
+        resultBox.innerHTML = "Your answers don’t match the factors we use when recommending PresSure, but staying in tune with your body is always valuable. You may find it helpful to check general breast wellness guidelines or chat with your healthcare provider about what works best for you.";
+    }
+
+    resultBox.style.display = "block";
+}
+</script>
+</body>
+</html>
