@@ -60,40 +60,49 @@
 </head>
 <body>
   <div class="container">
-    <img src="logo.jpg" alt="PresSure Logo" class="logo" />
 
     <h1>PresSure Fit Finder</h1>
 
     <p>Select all that apply.</p>
 
+    <!-- ALL REAL QUESTIONS NOW HAVE class="fit-option"  -->
+
     <div class="question">
-      <label><input type="checkbox" class="fit-option" id="q1"> I have been told by a healthcare provider that I may be at increased risk for breast cancer due to my genetics, family history, or breast density.</label>
+      <label><input type="checkbox" class="fit-option" id="q1">
+      I have been told by a healthcare provider that I may be at increased risk for breast cancer due to my genetics, family history, or breast density.</label>
     </div>
 
     <div class="question">
-      <label><input type="checkbox" class="fit-option" id="q2"> I have previously been treated for breast cancer.</label>
+      <label><input type="checkbox" class="fit-option" id="q2">
+      I have previously been treated for breast cancer.</label>
     </div>
 
     <div class="question">
-      <label><input type="checkbox" class="fit-option" id="q3"> I have received radiation treatment to my chest area.</label>
+      <label><input type="checkbox" class="fit-option" id="q3">
+      I have received radiation treatment to my chest area.</label>
     </div>
 
     <div class="question">
-      <label><input type="checkbox" class="fit-option" id="q4"> A close blood relative was diagnosed with breast cancer before age 50.</label>
+      <label><input type="checkbox" class="fit-option" id="q4">
+      A close blood relative was diagnosed with breast cancer before age 50.</label>
     </div>
 
     <div class="question">
-      <label><input type="checkbox" class="fit-option" id="q5"> A close relative has had male breast cancer at any age.</label>
+      <label><input type="checkbox" class="fit-option" id="q5">
+      A close relative has had male breast cancer at any age.</label>
     </div>
 
     <div class="question">
-      <label><input type="checkbox" class="fit-option" id="q6"> Two or more close relatives on the same side of my family have been diagnosed with breast or prostate cancer.</label>
+      <label><input type="checkbox" class="fit-option" id="q6">
+      Two or more close relatives on the same side of my family have been diagnosed with breast or prostate cancer.</label>
     </div>
 
     <div class="question">
-      <label><input type="checkbox" class="fit-option" id="q7"> Someone in my family carries a known breast‑cancer–related genetic mutation (BRCA1, BRCA2, PALB2, TP53, etc.).</label>
+      <label><input type="checkbox" class="fit-option" id="q7">
+      Someone in my family carries a known breast-cancer–related genetic mutation (BRCA1, BRCA2, PALB2, TP53, etc.).</label>
     </div>
 
+    <!-- NONE OF THE ABOVE -->
     <div class="question" style="margin-top: 25px; font-weight: bold;">
       <label><input type="checkbox" id="none"> None of the above apply to me.</label>
     </div>
@@ -104,38 +113,32 @@
   </div>
 
   <script>
-    // Auto-uncheck logic
-    const checkboxes = document.querySelectorAll('.fit-option');
+    // FIXED MUTUAL EXCLUSION LOGIC
+    const allOptions = document.querySelectorAll('.fit-option');
     const noneBox = document.getElementById('none');
 
-    checkboxes.forEach(box => {
-      box.addEventListener('change', () => {
-        if (box.id !== 'none' && box.checked) {
+    // If any real option is clicked → uncheck None
+    allOptions.forEach(opt => {
+      opt.addEventListener('change', () => {
+        if (opt.checked) {
           noneBox.checked = false;
-        }
-        if (box.id === 'none' && box.checked) {
-          checkboxes.forEach(other => {
-            if (other.id !== 'none') other.checked = false;
-          });
         }
       });
     });
 
+    // If None is clicked → uncheck all real options
+    noneBox.addEventListener('change', () => {
+      if (noneBox.checked) {
+        allOptions.forEach(opt => opt.checked = false);
+      }
+    });
+
     function calculateResult() {
-      const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+      const anyChecked = Array.from(allOptions).some(cb => cb.checked);
       const noneChecked = noneBox.checked;
       const resultBox = document.getElementById('result');
 
       resultBox.style.display = 'block';
 
       if (anyChecked) {
-        resultBox.textContent = "Based on your answers, PresSure may be a strong fit for you.";
-      } else if (noneChecked) {
-        resultBox.textContent = "Your answers don’t match the factors we use when recommending PresSure, but staying in tune with your body is always valuable. You may find it helpful to check general breast wellness guidelines or chat with your healthcare provider about what works best for you.";
-      } else {
-        resultBox.textContent = "Please select an option above.";
-      }
-    }
-  </script>
-</body>
-</html>
+        resultBox.textContent = "Based on your answers, PresSure may be a strong fit fo
