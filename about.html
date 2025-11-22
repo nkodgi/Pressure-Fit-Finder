@@ -69,11 +69,20 @@
             margin-bottom: 20px;
         }
 
-        .device-gallery img {
-            width: 260px;
+        /* 🌸 Pink Rounded Demo Video Button */
+        .video-btn {
+            display: inline-block;
             margin-top: 10px;
-            border-radius: 0; /* keeps PNG edges clean */
-            background: transparent; /* ensures PNG transparency stays */
+            background: #e89abf;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+        }
+        .video-btn:hover {
+            background: #d786ad;
         }
 
         footer {
@@ -117,12 +126,19 @@
     <h2>Why PresSure Matters</h2>
     <p>
         PresSure is noninvasive, low cost, and user friendly. It fills a critical gap between subjective self exams and expensive imaging by offering an objective and supportive way for women to stay in tune with their breast health at home. It contributes to the growing field of womens health innovation and accessible early awareness tools.
+        <br><br>
+        <!-- 🌸 Pink Button Link to Video -->
+        <a href="https://x.com/PresSure_Health/status/1990286393860575330?s=20" 
+           target="_blank" class="video-btn">
+           Watch Our Demo Video
+        </a>
     </p>
 
     <h2>Device Images</h2>
 
     <div class="device-gallery" style="text-align:center; margin-top:20px;">
-        <img src="device.png" alt="PresSure Device">
+        <img src="device.png" alt="PresSure Device" 
+         style="width:250px; border-radius:20px; box-shadow:0 4px 12px rgba(0,0,0,0.15); background: transparent;">
     </div>
 
     <p style="text-align:center; margin-top:10px; color:#777;">
