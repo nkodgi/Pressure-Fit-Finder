@@ -25,16 +25,23 @@
             color: #e89abf;
             font-weight: 600;
         }
+
+        /* Unified Navigation — matches About.html */
         nav {
-            margin-top: 10px;
+            margin-top: 15px;
+            margin-bottom: 25px;
         }
         nav a {
-            margin: 0 15px;
-            font-size: 0.95rem;
+            margin: 0 12px;
+            color: #e89abf;
             text-decoration: none;
-            color: #d86b8f;
-            font-weight: 700; /* <-- BOLD NAV LINKS ADDED */
+            font-weight: 700;
+            font-size: 1rem;
         }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
         .container {
             max-width: 800px;
             margin: 30px auto;
@@ -95,6 +102,8 @@
 <header>
     <img src="logo.jpg" alt="PresSure Logo" class="logo">
     <h1>Our Team</h1>
+
+    <!-- Updated Nav -->
     <nav>
         <a href="index.html">Fit Finder</a>
         <a href="about.html">About PresSure</a>
